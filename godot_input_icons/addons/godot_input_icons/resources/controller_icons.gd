@@ -28,4 +28,7 @@ extends Resource
 @export var start_button: Texture2D
 @export var back_button: Texture2D
 
-# TODO: Add more / others (joy sticks, joy stick clicks, etc)
+# Analog Sticks
+@export_category("Analog Sticks")
+@export var left_stick_in: Texture2D
+@export var right_stick_in: Texture2D
