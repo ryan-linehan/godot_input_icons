@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://ch2fg4s4ii5nr"]
+
+[ext_resource type="Texture2D" uid="uid://cfeqmhuf6p88b" path="res://addons/godot_input_icons/assets/kenny_controller_icons/PlayStation Series/playstation-series_sheet_default.png" id="1_g4e88"]
+
+[resource]
+atlas = ExtResource("1_g4e88")
+region = Rect2(136, 520, 48, 48)
