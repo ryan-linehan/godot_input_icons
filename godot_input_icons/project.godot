@@ -54,7 +54,7 @@ walk_up={
 
 [input_icons]
 
-input_icons_map="res://addons/godot_input_icons/default_icon_maps/default_map.tres"
+use_input_helper=true
 
 [rendering]
 

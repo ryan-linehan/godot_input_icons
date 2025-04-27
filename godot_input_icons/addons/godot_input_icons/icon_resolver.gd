@@ -1,9 +1,7 @@
 @tool
 class_name IconResolver
 
-const InputTypes = preload("res://addons/godot_input_icons/constants.gd").InputTypes
-var map_path_default_value = preload("res://addons/godot_input_icons/constants.gd").DEFAULT_MAP_PATH
-var map_path_setting_name = preload("res://addons/godot_input_icons/constants.gd").MAP_PATH_SETTING_NAME
+const InputTypes = preload("res://addons/godot_input_icons/input_icon_constants.gd").InputTypes
 
 var input_map: InputIconMap = null
 
@@ -97,14 +95,21 @@ func get_joypad_icon(device_type: InputTypes, input_action: String, index: int =
 	
 ## Gets all input events for a specified action
 func get_input_events_for_action(input_action: String):
-	var project_setting_input = ProjectSettings.get_setting("input/%s" % [input_action])
-	if not project_setting_input:
-		return []
-		
 	var input_events: Array[InputEvent] = []
-	var input_dict = project_setting_input as Dictionary
-	for item in input_dict.get_or_add("events", []):
-		input_events.append(item as InputEvent)
+	if Engine.is_editor_hint():
+		var project_setting_input = ProjectSettings.get_setting("input/%s" % [input_action])
+		if not project_setting_input:
+			return input_events
+			
+		var input_dict = project_setting_input as Dictionary
+		for item in input_dict.get_or_add("events", []):
+			input_events.append(item as InputEvent)
+	else:
+		# At runtime we need to use godot's InputMap singleton
+		# because remapping inputs is not saved in the project settings
+		var events = InputMap.action_get_events(input_action)
+		if events:
+			input_events.append_array(events)
 	return input_events
 
 ## Gets a keyboard or mouse button action at a specific index.
@@ -233,9 +238,8 @@ static func combine_textures_with_gap(textures: Array[Texture2D], gap: int = 2) 
 	var max_height = 0
 
 	for texture in textures:
-		if texture is Texture2D:
-			total_width += texture.get_width() + gap
-			max_height = max(max_height, texture.get_height())
+		total_width += texture.get_width() + gap
+		max_height = max(max_height, texture.get_height())
 
 	total_width -= gap  # Remove the last gap
 	
@@ -244,10 +248,9 @@ static func combine_textures_with_gap(textures: Array[Texture2D], gap: int = 2) 
 	# Blit each texture onto the combined image with a gap
 	var current_x = 0
 	for texture in textures:
-		if texture is Texture2D:
-			var image = texture.get_image()
-			combined_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2(current_x, 0))
-			current_x += texture.get_width() + gap
+		var image = texture.get_image()
+		combined_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2(current_x, 0))
+		current_x += texture.get_width() + gap
 			
 	return ImageTexture.create_from_image(combined_image)
 

@@ -11,9 +11,12 @@ const InputTypes = preload("res://addons/godot_input_icons/input_icon_constants.
 ## mappings for the same action and device type
 @export var action_index: int = 0: set = set_action_index
 
-var _icon_resolver = IconResolver.new()
-
+var _icon_resolver: IconResolver = IconResolver.new()
+var input_helper_adapter: InputHelperAdapter = null
 func _ready():
+	if not Engine.is_editor_hint() and \
+		ProjectSettings.get_setting(InputIconConstants.INPUT_HELPER_ADAPTER_SETTING_NAME, false):
+		input_helper_adapter = InputHelperAdapter.new(_action_property_value, _update_texture)
 	_update_texture()
 	
 func set_action_index(value: int):
@@ -37,22 +40,6 @@ func _get_configuration_warnings() -> PackedStringArray:
 	if not texture and _action_property_value != "--select--":
 		return ["Input icon not mapped"]
 	return []
-#
-#func _on_keyboard_input_changed(action: String, input: InputEvent) -> void:
-	#if action == _input_event_name:
-		#_update_texture()
-#
-#func _on_joypad_input_changed(action: String, input: InputEvent) -> void:
-	#if action == _input_event_name:
-		#_update_texture()
-#
-#func _on_joypad_changed(device_index: int, is_connected: bool) -> void:
-	##display_device = InputHelper.device
-	#_update_texture()
-#
-#func _on_device_changed(device: InputTypes, device_index: int) -> void:
-	#display_device = device
-	#_update_texture()
 
 func set_action_property_value(value: Variant):
 	_action_property_value = value
