@@ -61,6 +61,8 @@ extends Resource
 @export var key_alt: Texture2D
 @export var key_ctrl: Texture2D
 @export var key_shift: Texture2D
+# Windows key / apple key
+@export var key_meta: Texture2D
 
 # Arrow Keys
 @export_group("Arrow Keys")

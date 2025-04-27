@@ -25,17 +25,40 @@ func get_icon(device_type: InputTypes, input_action: String, index: int = 0) -> 
 ## an action
 func get_keyboard_icon(input_action: String, index: int = 0) -> Texture2D:
 	var input_event = get_keyboard_input_event_for_action(input_action, index)
+	var textures: Array[Texture2D] = []
+	# Add modifiers first
+	if input_event is InputEventWithModifiers:
+		textures.append_array(get_keyboard_modifier_icons(input_event))
+	
+	# Add key after
 	if input_event is InputEventKey:
-		# TODO: Validate as_text_physical_keycode will work for our purposes
-		var key_name = input_event.as_text_physical_keycode().to_lower()
+		# Get the OS keycode string (this ignores the modifiers and lets us get just the key)
+		var key_name = OS.get_keycode_string(input_event.physical_keycode).to_lower()		
 		var texture = input_map.keyboard_icons.get("key_%s" % [key_name])
 		if texture:
-			return texture
+			textures.append(texture)
 	elif input_event is InputEventMouseButton:
 		var texture = get_mouse_button_icon(input_event)
 		if texture:
-			return texture
-	return null
+			textures.append(texture)
+			
+	if textures.size() == 0:
+		return null
+	elif textures.size() == 1:
+		return textures[0]
+	return combine_textures_with_gap(textures)
+
+func get_keyboard_modifier_icons(input_event: InputEventWithModifiers) -> Array[Texture2D]:
+	var textures: Array[Texture2D] = []
+	if input_event.alt_pressed:
+		textures.append(input_map.keyboard_icons.key_alt)
+	if input_event.ctrl_pressed:
+		textures.append(input_map.keyboard_icons.key_ctrl)
+	if input_event.meta_pressed:
+		textures.append(input_map.keyboard_icons.key_meta)
+	if input_event.shift_pressed:
+		textures.append(input_map.keyboard_icons.key_shift)
+	return textures
 
 func get_mouse_button_icon(input_event: InputEventMouseButton) -> Texture2D:
 	match input_event.button_index:
@@ -192,6 +215,33 @@ static func get_device_type_display(device_type: InputTypes) -> String:
 		InputTypes.Generic:
 			return "Generic"
 	return "Unknown device type"
+
+
+## TODO: Consider caching textures that are combined so they don't
+## need to be recreated over and over
+## Combines an array of Texture2Ds and converts them into a single Texture2D with a gap
+static func combine_textures_with_gap(textures: Array[Texture2D], gap: int = 2) -> Texture2D:
+	var total_width = 0
+	var max_height = 0
+
+	for texture in textures:
+		if texture is Texture2D:
+			total_width += texture.get_width() + gap
+			max_height = max(max_height, texture.get_height())
+
+	total_width -= gap  # Remove the last gap
+	
+	var combined_image = Image.create_empty(total_width, max_height, false, Image.FORMAT_RGBA8)
+
+	# Blit each texture onto the combined image with a gap
+	var current_x = 0
+	for texture in textures:
+		if texture is Texture2D:
+			var image = texture.get_image()
+			combined_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2(current_x, 0))
+			current_x += texture.get_width() + gap
+			
+	return ImageTexture.create_from_image(combined_image)
 
 ## Gets all registered user inputs (filters out inputs that start with ui_)
 static func get_all_user_registered_inputs() -> PackedStringArray:

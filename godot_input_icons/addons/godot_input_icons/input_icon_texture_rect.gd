@@ -8,7 +8,7 @@ const InputTypes = preload("res://addons/godot_input_icons/constants.gd").InputT
 
 func _ready():
 	_update_texture()
-
+	
 func set_preview_device(value: InputTypes) -> void:
 	_preview_device = value
 	_update_texture()
