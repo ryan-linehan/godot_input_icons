@@ -32,11 +32,24 @@ func get_keyboard_icon(input_action: String, index: int = 0) -> Texture2D:
 		if texture:
 			return texture
 	elif input_event is InputEventMouseButton:
-		# TODO: Handle mouse buttons
-		input_event.button_index
-		pass
+		var texture = get_mouse_button_icon(input_event)
+		if texture:
+			return texture
 	return null
 
+func get_mouse_button_icon(input_event: InputEventMouseButton) -> Texture2D:
+	match input_event.button_index:
+		MOUSE_BUTTON_LEFT:
+			return input_map.keyboard_icons.mouse_left_click
+		MOUSE_BUTTON_RIGHT:
+			return input_map.keyboard_icons.mouse_right_click
+		MOUSE_BUTTON_MIDDLE:
+			return input_map.keyboard_icons.mouse_middle_click
+		MOUSE_BUTTON_XBUTTON1:			
+			return input_map.keyboard_icons.mouse_extra_button1
+		MOUSE_BUTTON_XBUTTON2:
+			return input_map.keyboard_icons.mouse_extra_button2
+	return null
 
 ## Gets the controller icon for the first controller input associated with
 ## an action
@@ -56,7 +69,6 @@ func get_joypad_icon(device_type: InputTypes, input_action: String, index: int =
 	return null
 	
 ## Gets all input events for a specified action
-## returns null if no actions are found
 func get_input_events_for_action(input_action: String):
 	var project_setting_input = ProjectSettings.get_setting("input/%s" % [input_action])
 	if not project_setting_input:

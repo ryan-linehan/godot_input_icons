@@ -51,19 +51,16 @@ extends Resource
 @export var key_8: Texture2D
 @export var key_9: Texture2D
 
-# Mouse Buttons
-@export_group("Mouse Buttons")
-@export var left_click: Texture2D
-@export var right_click: Texture2D
-
 # Special Keys
 @export_group("Special Keys")
 @export var key_space: Texture2D
+@export var key_tab: Texture2D
+@export var key_escape: Texture2D
+
+@export_group("Modifiers")
 @export var key_alt: Texture2D
 @export var key_ctrl: Texture2D
 @export var key_shift: Texture2D
-@export var key_tab: Texture2D
-@export var key_escape: Texture2D
 
 # Arrow Keys
 @export_group("Arrow Keys")
