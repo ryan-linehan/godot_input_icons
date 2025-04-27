@@ -33,29 +33,17 @@ func get_keyboard_icon(input_action: String, index: int = 0) -> Texture2D:
 			return texture
 	elif input_event is InputEventMouseButton:
 		# TODO: Handle mouse buttons
+		input_event.button_index
 		pass
 	return null
 
-func get_device_type_display(device_type: InputTypes) -> String:
-	match device_type:
-		InputTypes.Keyboard:
-			return "Keyboard"
-		InputTypes.Xbox:
-			return "Xbox"
-		InputTypes.Playstation:
-			return "Playstation"
-		InputTypes.Switch:
-			return "Switch"
-		InputTypes.Generic:
-			return "Generic"
-	return "Unknown device type"
 
 ## Gets the controller icon for the first controller input associated with
 ## an action
 func get_joypad_icon(device_type: InputTypes, input_action: String, index: int = 0) -> Texture2D:
 	if not input_map.controller_icons.has(device_type):
-		push_warning("InputIcons: icon not found action %s for device %s" % \
-			 [get_device_type_display(device_type), input_map])
+		push_warning("InputIcons: Missing icon map for device %s" % \
+			[get_device_type_display(device_type)])
 		return null
 		
 	var joypad_icon_map = input_map.controller_icons.get(device_type)
@@ -72,7 +60,7 @@ func get_joypad_icon(device_type: InputTypes, input_action: String, index: int =
 func get_input_events_for_action(input_action: String):
 	var project_setting_input = ProjectSettings.get_setting("input/%s" % [input_action])
 	if not project_setting_input:
-		return null
+		return []
 		
 	var input_events: Array[InputEvent] = []
 	var input_dict = project_setting_input as Dictionary
@@ -178,6 +166,20 @@ func _get_joypad_button_icon(icon_map: ControllerIcons, button_event: InputEvent
 			#return icon_map.max_button
 		_:
 			return null
+
+static func get_device_type_display(device_type: InputTypes) -> String:
+	match device_type:
+		InputTypes.Keyboard:
+			return "Keyboard"
+		InputTypes.Xbox:
+			return "Xbox"
+		InputTypes.Playstation:
+			return "Playstation"
+		InputTypes.Switch:
+			return "Switch"
+		InputTypes.Generic:
+			return "Generic"
+	return "Unknown device type"
 
 ## Gets all registered user inputs (filters out inputs that start with ui_)
 static func get_all_user_registered_inputs() -> PackedStringArray:
