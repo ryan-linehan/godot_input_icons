@@ -115,7 +115,9 @@ func get_input_events_for_action(input_action: String):
 func get_keyboard_input_event_for_action(input_action: String, index: int = 0) -> InputEvent:
 	var events = get_input_events_for_action(input_action)
 	var filtered_events = events.filter(func(event): return event is InputEventKey or event is InputEventMouseButton)
-	if not filtered_events or filtered_events.size() < index:
+	if not filtered_events or index >= filtered_events.size():
+		push_warning("InputIcons: keyboard action '%s' at index %s not found." % \
+			 [input_action, index])
 		return null
 	return filtered_events[index]
 	
@@ -128,7 +130,9 @@ func get_joypad_input_event_for_action(input_action: String, index: int = 0) -> 
 	var events = get_input_events_for_action(input_action)
 	var filtered_events = events.filter(func(event): return event is InputEventJoypadButton \
 		 or event is InputEventJoypadMotion)
-	if not filtered_events or filtered_events.size() < index:
+	if not filtered_events or index >= filtered_events.size():
+		push_warning("InputIcons: joypad action '%s' at index %s not found." % \
+			 [input_action, index])
 		return null
 	return filtered_events[index]
 	
