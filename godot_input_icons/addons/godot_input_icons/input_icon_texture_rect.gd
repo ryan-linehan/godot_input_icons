@@ -4,20 +4,39 @@ extends TextureRect
 
 const InputTypes = preload("res://addons/godot_input_icons/constants.gd").InputTypes
 
-@export var _preview_device: InputTypes = InputTypes.Keyboard: set = set_preview_device
+## The display device for the texture rect
+@export var display_device: InputTypes = InputTypes.Keyboard: set = set_display_device
+
+## The input index to use when displaying this control for when there are multiple
+## mappings for the same action and device type
+@export var action_index: int = 0: set = set_action_index
+
+var _icon_resolver = IconResolver.new()
 
 func _ready():
 	_update_texture()
 	
-func set_preview_device(value: InputTypes) -> void:
-	_preview_device = value
+func set_action_index(value: int):
+	action_index = value
+	_update_texture()
+	
+func set_display_device(value: InputTypes) -> void:
+	display_device = value
 	_update_texture()
 
-
 func _update_texture() -> void:
-	var icon_resolver = IconResolver.new()
-	var result = icon_resolver.get_icon(_preview_device, _action_property_value)
+	if _action_property_value == "--select--":
+		texture = null
+		return
+	
+	var result = _icon_resolver.get_icon(display_device, _action_property_value, action_index)
 	texture = result
+	update_configuration_warnings()
+	
+func _get_configuration_warnings() -> PackedStringArray:
+	if not texture and _action_property_value != "--select--":
+		return ["Input icon not mapped"]
+	return []
 #
 #func _on_keyboard_input_changed(action: String, input: InputEvent) -> void:
 	#if action == _input_event_name:
@@ -28,11 +47,11 @@ func _update_texture() -> void:
 		#_update_texture()
 #
 #func _on_joypad_changed(device_index: int, is_connected: bool) -> void:
-	##_preview_device = InputHelper.device
+	##display_device = InputHelper.device
 	#_update_texture()
 #
 #func _on_device_changed(device: InputTypes, device_index: int) -> void:
-	#_preview_device = device
+	#display_device = device
 	#_update_texture()
 
 func set_action_property_value(value: Variant):
