@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="InputIconMap" load_steps=5 format=3 uid="uid://dugr8x7rasv3i"]
+
+[ext_resource type="Script" uid="uid://db0gxldvhci3p" path="res://addons/godot_input_icons/resources/controller_icons.gd" id="1_uig4p"]
+[ext_resource type="Resource" uid="uid://bai5y1ydlgfrt" path="res://addons/godot_input_icons/input_maps/generic_default_map.tres" id="2_6pblh"]
+[ext_resource type="Resource" uid="uid://dcrdbbhivenx7" path="res://addons/godot_input_icons/input_maps/keyboard_default_map.tres" id="3_57yb1"]
+[ext_resource type="Script" uid="uid://dth3wa8g0tv2g" path="res://addons/godot_input_icons/resources/input_icon_map.gd" id="4_5wo7m"]
+
+[resource]
+script = ExtResource("4_5wo7m")
+keyboard_icons = ExtResource("3_57yb1")
+controller_icons = Dictionary[int, ExtResource("1_uig4p")]({
+1: ExtResource("2_6pblh"),
+2: ExtResource("2_6pblh"),
+3: ExtResource("2_6pblh"),
+4: ExtResource("2_6pblh")
+})
+metadata/_custom_type_script = "uid://dth3wa8g0tv2g"
