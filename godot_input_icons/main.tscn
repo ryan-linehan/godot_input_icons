@@ -9,4 +9,3 @@ offset_bottom = 16.0
 texture = ExtResource("1_0xm2m")
 stretch_mode = 4
 script = ExtResource("1_ig7tw")
-action_name = &"attack"

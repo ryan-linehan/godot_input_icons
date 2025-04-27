@@ -2,7 +2,7 @@
 class_name InputIconTextureRect
 extends TextureRect
 
-const InputTypes = preload("res://addons/godot_input_icons/constants.gd").InputTypes
+const InputTypes = preload("res://addons/godot_input_icons/input_icon_constants.gd").InputTypes
 
 ## The display device for the texture rect
 @export var display_device: InputTypes = InputTypes.Keyboard: set = set_display_device
