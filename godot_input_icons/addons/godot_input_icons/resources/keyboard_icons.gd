@@ -51,7 +51,7 @@ extends Resource
 
 # Special Keys
 @export_category("Special Keys")
-@export var key_space_bar: Texture2D
+@export var key_space: Texture2D
 @export var key_alt: Texture2D
 @export var key_ctrl: Texture2D
 @export var key_shift: Texture2D

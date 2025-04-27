@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cipb74td5x87b"]
+
+[ext_resource type="Script" uid="uid://d2a2relwnivg5" path="res://addons/godot_input_icons/input_icon_texture_rect.gd" id="1_ig7tw"]
+
+[node name="Control" type="TextureRect"]
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_ig7tw")
+_preview_device = 1
+action_name = &"--select--"
