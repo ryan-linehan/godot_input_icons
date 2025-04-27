@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="KeyboardIcons" load_steps=53 format=3 uid="uid://dcrdbbhivenx7"]
+[gd_resource type="Resource" script_class="KeyboardIcons" load_steps=65 format=3 uid="uid://dcrdbbhivenx7"]
 
 [ext_resource type="Texture2D" uid="uid://dq65jge6qub2p" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/numerics/key_0.tres" id="1_xxbym"]
 [ext_resource type="Texture2D" uid="uid://hv25c0lhhfnu" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/letters/key_a.tres" id="1_yt5k1"]
@@ -40,14 +40,26 @@
 [ext_resource type="Texture2D" uid="uid://dtlhl1gs0sx5t" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/letters/key_t.tres" id="21_xdp1u"]
 [ext_resource type="Texture2D" uid="uid://b2t4x02yqderq" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/letters/key_u.tres" id="22_e6yiy"]
 [ext_resource type="Texture2D" uid="uid://dsc88wdrie6nh" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/letters/key_v.tres" id="23_fnfc2"]
+[ext_resource type="Texture2D" uid="uid://da7fi4jmc4ubq" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/function_keys/key_f1.tres" id="24_u7e4s"]
 [ext_resource type="Texture2D" uid="uid://cjacbj8rlq0wo" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/letters/key_w.tres" id="24_v0q3l"]
 [ext_resource type="Texture2D" uid="uid://dgidus488br28" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/letters/key_x.tres" id="25_31ejy"]
+[ext_resource type="Texture2D" uid="uid://djthdqqmkcnqs" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/function_keys/key_f2.tres" id="25_i0goc"]
+[ext_resource type="Texture2D" uid="uid://di024mnsi21ub" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/function_keys/key_f10.tres" id="25_u4qtb"]
+[ext_resource type="Texture2D" uid="uid://boi20llwl36w0" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/function_keys/key_f3.tres" id="26_5ppjj"]
+[ext_resource type="Texture2D" uid="uid://da1qbcelu55ki" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/function_keys/key_f11.tres" id="26_km774"]
 [ext_resource type="Texture2D" uid="uid://ora2o38an0cl" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/letters/key_y.tres" id="26_rm6g5"]
+[ext_resource type="Texture2D" uid="uid://bkwc475fh0avc" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/function_keys/key_f12.tres" id="27_hdoag"]
 [ext_resource type="Texture2D" uid="uid://cniapuyixww4q" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/letters/key_z.tres" id="27_rbepc"]
+[ext_resource type="Texture2D" uid="uid://i02scclqc740" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/function_keys/key_f4.tres" id="27_u4qtb"]
 [ext_resource type="Texture2D" uid="uid://ism0x27mrj2n" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/mouse/mouse_extra_button1.tres" id="28_8wfsk"]
+[ext_resource type="Texture2D" uid="uid://k3x6so4rpv6q" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/function_keys/key_f5.tres" id="28_km774"]
+[ext_resource type="Texture2D" uid="uid://cvvtp414amg02" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/function_keys/key_f6.tres" id="29_hdoag"]
 [ext_resource type="Texture2D" uid="uid://d0rfw6f6cl60y" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/mouse/mouse_extra_button2.tres" id="29_u7e4s"]
 [ext_resource type="Texture2D" uid="uid://bd5vfnn8limb2" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/mouse/mouse_left_click.tres" id="30_i0goc"]
+[ext_resource type="Texture2D" uid="uid://d2ox64ovm6bpy" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/function_keys/key_f7.tres" id="30_p04ft"]
 [ext_resource type="Texture2D" uid="uid://d3ug1e6cq7faj" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/mouse/mouse_middle_click.tres" id="31_5ppjj"]
+[ext_resource type="Texture2D" uid="uid://coxjc3c84b08a" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/function_keys/key_f8.tres" id="31_sv887"]
+[ext_resource type="Texture2D" uid="uid://b68fai8bfkgeo" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/function_keys/key_f9.tres" id="32_81nu2"]
 [ext_resource type="Texture2D" uid="uid://6xiftpjsbdrw" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/mouse/mouse_right_click.tres" id="32_u4qtb"]
 [ext_resource type="Script" uid="uid://c3ievetg3ws5h" path="res://addons/godot_input_icons/resources/keyboard_icons.gd" id="33_km774"]
 [ext_resource type="Texture2D" uid="uid://db0w1hem5snl" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/special_keys/key_tab.tres" id="33_m0ngv"]
@@ -106,4 +118,16 @@ key_arrow_up = ExtResource("16_fnfc2")
 key_arrow_down = ExtResource("13_dqdke")
 key_arrow_left = ExtResource("14_xdp1u")
 key_arrow_right = ExtResource("15_e6yiy")
+key_f1 = ExtResource("24_u7e4s")
+key_f2 = ExtResource("25_i0goc")
+key_f3 = ExtResource("26_5ppjj")
+key_f4 = ExtResource("27_u4qtb")
+key_f5 = ExtResource("28_km774")
+key_f6 = ExtResource("29_hdoag")
+key_f7 = ExtResource("30_p04ft")
+key_f8 = ExtResource("31_sv887")
+key_f9 = ExtResource("32_81nu2")
+key_f10 = ExtResource("25_u4qtb")
+key_f11 = ExtResource("26_km774")
+key_f12 = ExtResource("27_hdoag")
 metadata/_custom_type_script = "uid://c3ievetg3ws5h"
