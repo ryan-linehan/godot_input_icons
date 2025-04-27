@@ -2,8 +2,15 @@
 class_name KeyboardIcons
 extends Resource
 
+@export_group("Mouse Buttons")
+@export var mouse_left_click: Texture2D
+@export var mouse_right_click: Texture2D
+@export var mouse_middle_click: Texture2D
+@export var mouse_extra_button1: Texture2D
+@export var mouse_extra_button2: Texture2D
+
 # Letters
-@export_category("Letters")
+@export_group("Letters")
 @export var key_a: Texture2D
 @export var key_b: Texture2D
 @export var key_c: Texture2D
@@ -32,7 +39,7 @@ extends Resource
 @export var key_z: Texture2D
 
 # Numbers
-@export_category("Numbers")
+@export_group("Numbers")
 @export var key_0: Texture2D
 @export var key_1: Texture2D
 @export var key_2: Texture2D
@@ -45,12 +52,12 @@ extends Resource
 @export var key_9: Texture2D
 
 # Mouse Buttons
-@export_category("Mouse Buttons")
+@export_group("Mouse Buttons")
 @export var left_click: Texture2D
 @export var right_click: Texture2D
 
 # Special Keys
-@export_category("Special Keys")
+@export_group("Special Keys")
 @export var key_space: Texture2D
 @export var key_alt: Texture2D
 @export var key_ctrl: Texture2D
@@ -59,14 +66,14 @@ extends Resource
 @export var key_escape: Texture2D
 
 # Arrow Keys
-@export_category("Arrow Keys")
+@export_group("Arrow Keys")
 @export var key_arrow_up: Texture2D
 @export var key_arrow_down: Texture2D
 @export var key_arrow_left: Texture2D
 @export var key_arrow_right: Texture2D
 
 # Function Keys
-@export_category("Function Keys")
+@export_group("Function Keys")
 @export var key_f1: Texture2D
 @export var key_f2: Texture2D
 @export var key_f3: Texture2D
