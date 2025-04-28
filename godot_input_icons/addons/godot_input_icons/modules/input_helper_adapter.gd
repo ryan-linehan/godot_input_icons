@@ -6,7 +6,7 @@ var _update_texture_callback: Callable
 var _update_display_device_callback: Callable
 # The device indexes to listen for. Defaults to -1 & 0 (keyboard and mouse + first controller)
 var device_indexes: PackedInt32Array = [-1, 0]
-static var editor_device_indexes_default: PackedInt32Array = [0, -1]
+static var editor_device_indexes_default: PackedInt32Array = [-1, 0]
 
 func _init(action_name: String, update_texture_callback: Callable,
 	update_display_device_callback: Callable) -> void:

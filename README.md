@@ -11,9 +11,6 @@ A godot plugin for displaying keyboard and controller icons
   
 ## In Progress
 
-- When a plugin project setting input changes reload the icon rect / update texture if we can
-- When the path for the default maps changes reload the icon rect / update text(or require editor restart?)
-- plugin project settings 'category' and property descriptions
 - Input remapper demo project + UI example (requires input_helper_adapter enablement)
 - Complete TODOs or move into planned / future
 - Update all code so that it is statically typed

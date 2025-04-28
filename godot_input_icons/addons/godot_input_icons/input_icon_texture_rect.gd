@@ -101,7 +101,7 @@ func _set(property: StringName, value: Variant) -> bool:
 		set_action_property_value(value)
 		return true
 	elif property == InputHelperAdapter.device_indexes_property_name \
-		and input_helper_adapter != null:
+		and input_helper_adapter != null and is_input_helper_adapter_enabled:
 			input_helper_adapter.device_indexes = value
 			return true
 	return false
@@ -111,7 +111,7 @@ func _get(property: StringName) -> Variant:
 	if property == _action_property_name:
 		return _action_property_value
 	elif property == InputHelperAdapter.device_indexes_property_name \
-		and input_helper_adapter != null:
+		and input_helper_adapter != null and is_input_helper_adapter_enabled:
 			return input_helper_adapter.device_indexes
 	return null
 	

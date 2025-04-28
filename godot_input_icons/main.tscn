@@ -11,7 +11,7 @@ texture = ExtResource("1_h2yge")
 stretch_mode = 4
 script = ExtResource("1_ig7tw")
 action_name = &"attack"
-device_indexes = PackedInt32Array(0, -1)
+device_indexes = PackedInt32Array(-1, 0)
 
 [node name="RemapInput" type="Node" parent="."]
 script = ExtResource("3_h2yge")

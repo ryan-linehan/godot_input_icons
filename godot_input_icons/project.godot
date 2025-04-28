@@ -54,7 +54,7 @@ walk_up={
 
 [input_icons]
 
-use_input_helper=true
+settings/use_input_helper=true
 
 [rendering]
 

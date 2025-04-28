@@ -6,7 +6,6 @@ const InputTypes = preload("res://addons/godot_input_icons/input_icon_constants.
 var input_map: InputIconMap = null
 
 ## Initalizes the resolver by loading the map specified by the plugin
-## TODO: Consider allowing a user to override the input map manually?
 func _init() -> void:
 	input_map = load(ProjectSettings.get_setting(InputIconConstants.MAP_PATH_SETTING_NAME, InputIconConstants.DEFAULT_MAP_PATH))
 	pass
