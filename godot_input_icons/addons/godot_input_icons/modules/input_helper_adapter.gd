@@ -1,14 +1,14 @@
 @tool
 class_name InputHelperAdapter
 
-var _action_name: String
+var action_name: String
 var _update_texture_callback: Callable
 var _update_display_device_callback: Callable
 # The device indexes to listen for. Defaults to -1 & 0 (keyboard and mouse + first controller)
 var device_indexes: PackedInt32Array = [-1, 0]
 static var editor_device_indexes_default: PackedInt32Array = [-1, 0]
 
-func _init(action_name: String, update_texture_callback: Callable,
+func _init(action_name_val: String, update_texture_callback: Callable,
 	update_display_device_callback: Callable) -> void:
 	if Engine.is_editor_hint():
 		return
@@ -17,7 +17,7 @@ func _init(action_name: String, update_texture_callback: Callable,
 	var scene_tree = loop as SceneTree
 	var input_helper = scene_tree.root.get_node("InputHelper") as InputHelper
 	if input_helper:
-		_action_name = action_name
+		action_name = action_name_val
 		_update_texture_callback = update_texture_callback
 		_update_display_device_callback = update_display_device_callback
 		input_helper.device_changed.connect(on_device_changed)
@@ -27,8 +27,6 @@ func _init(action_name: String, update_texture_callback: Callable,
 	else:
 		push_warning("Unable to locate InputHelper. Did you add the plugin and enable it?")
 
-func set_action_name(val: String):
-	_action_name = val
 
 func on_device_changed(device: String, device_index: int):
 	if device_index not in device_indexes and \
@@ -38,11 +36,11 @@ func on_device_changed(device: String, device_index: int):
 	_update_display_device_callback.callv([device_id])
 	
 func on_keyboard_input_changed(action: String, input: InputEvent):
-	if action == _action_name:
+	if action == action_name:
 		_update_texture_callback.call()
 	
 func on_joypad_input_changed(action: String, input: InputEvent):
-	if action == _action_name:
+	if action == action_name:
 		_update_texture_callback.call()
 
 func on_joypad_changed(device_index: int, is_connected: bool):

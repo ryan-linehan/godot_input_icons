@@ -16,7 +16,7 @@ var is_input_helper_adapter_enabled: bool = false
 #region Editor custom property variables
 var _action_property_name: String = "action_name"
 var _action_property_default: StringName = "--select--"
-var _action_property_value: StringName = _action_property_default
+var action_name: StringName = _action_property_default: set = set_action_property_value
 #endregion
 
 func _init():
@@ -24,7 +24,7 @@ func _init():
 
 func _ready():
 	if is_input_helper_adapter_enabled:
-		input_helper_adapter = InputHelperAdapter.new(_action_property_value, _update_texture, set_display_device)
+		input_helper_adapter = InputHelperAdapter.new(action_name, _update_texture, set_display_device)
 	_update_texture()
 	
 	
@@ -42,18 +42,20 @@ func set_display_device(value: InputIconConstants.InputTypes) -> void:
 ## Updates the texture of the control to the control's current
 ## configuration (display_device + action)
 func _update_texture() -> void:
-	if _action_property_value == _action_property_default:
+	if action_name == _action_property_default:
 		texture = null
 		return
 	
-	var result = _icon_resolver.get_icon(display_device, _action_property_value, action_index)
+	var result = _icon_resolver.get_icon(display_device, action_name, action_index)
 	texture = result
 	update_configuration_warnings()
 
 #region Godot Editor Customizations
 
 func set_action_property_value(value: Variant):
-	_action_property_value = value
+	action_name = value
+	if input_helper_adapter != null:
+		input_helper_adapter.action_name = value
 	_update_texture()
 
 
@@ -78,7 +80,7 @@ func _property_get_revert(property: StringName) -> Variant:
 
 
 func _get_configuration_warnings() -> PackedStringArray:
-	if not texture and _action_property_value != _action_property_default:
+	if not texture and action_name != _action_property_default:
 		return ["Input icon not mapped"]
 	return []
 
@@ -109,7 +111,7 @@ func _set(property: StringName, value: Variant) -> bool:
 
 func _get(property: StringName) -> Variant:
 	if property == _action_property_name:
-		return _action_property_value
+		return action_name
 	elif property == InputHelperAdapter.device_indexes_property_name \
 		and input_helper_adapter != null and is_input_helper_adapter_enabled:
 			return input_helper_adapter.device_indexes

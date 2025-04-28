@@ -8,10 +8,10 @@ A godot plugin for displaying keyboard and controller icons
   - Supports keyboard modifiers for any combination of keys that can be registered in the input map
   - Integration with input_helper  [TODO: link input_helper ]
     (TODO: Create readme section for integration details - include info about 'device index' support)
+  - Input remapper example (requires input_helper_adapter enablement)  
   
 ## In Progress
 
-- Input remapper demo project + UI example (requires input_helper_adapter enablement)
 - Complete TODOs or move into planned / future
 - Update all code so that it is statically typed
 - Rename plugin to match input_helper's naming convention
@@ -19,11 +19,13 @@ A godot plugin for displaying keyboard and controller icons
 
 ## Planned
 
-- C# nuget package wrapper (if needed)
 - Add the rest of the keys + add them to default maps
 - Add the rest of joypad inputs + add them to default maps
 - Add different icons for the different controller types
-- Add more controller types
+- Add more controller types (sub-types from input_helper plugin)
+- Add a theme for demo project
+- Update remapper demo to support modifiers
+- C# nuget package wrapper (if needed)
 
 ## Future
 

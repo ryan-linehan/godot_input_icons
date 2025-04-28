@@ -1,18 +1,99 @@
 [gd_scene load_steps=4 format=3 uid="uid://cipb74td5x87b"]
 
-[ext_resource type="Texture2D" uid="uid://di0tthoimapkw" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/special_keys/key_space.tres" id="1_h2yge"]
-[ext_resource type="Script" uid="uid://d2a2relwnivg5" path="res://addons/godot_input_icons/input_icon_texture_rect.gd" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://bggplisxt6knl" path="res://remap_input_example.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://dofhds2ttw30" path="res://remap_input_demo/remap_example.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://b0ll35eulteec" path="res://remap_input_demo/remap_input_row.tscn" id="1_1bvp3"]
+[ext_resource type="Script" uid="uid://nei7ddo8bmn0" path="res://remap_input_demo/input_helper_warning_panel.gd" id="3_h2yge"]
 
-[node name="Control" type="TextureRect"]
-offset_right = 16.0
-offset_bottom = 16.0
-texture = ExtResource("1_h2yge")
-stretch_mode = 4
-script = ExtResource("1_ig7tw")
-action_name = &"attack"
-device_indexes = PackedInt32Array(-1, 0)
+[node name="CanvasLayer" type="CanvasLayer"]
+metadata/_edit_vertical_guides_ = [960.0]
 
-[node name="RemapInput" type="Node" parent="."]
+[node name="RemapExample" type="Panel" parent="." node_paths=PackedStringArray("remap_control")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -169.0
+offset_top = -119.0
+offset_right = 169.0
+offset_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0xm2m")
+remap_input_row = ExtResource("1_1bvp3")
+remap_control = NodePath("../RemapInputPanel")
+remappable_inputs_dictionary = Dictionary[String, String]({
+"attack": "Attack",
+"defend": "Defend"
+})
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RemapExample"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RemapInputsLabel" type="Label" parent="RemapExample/VBoxContainer"]
+layout_mode = 2
+text = "Remap Inputs"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RemapExample/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InputRowsContainer" type="VBoxContainer" parent="RemapExample/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="RemapExample/VBoxContainer/ScrollContainer/InputRowsContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="RemapInputPanel" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -29.5
+offset_right = 94.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="RemapInputPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 6.5
+offset_right = 20.0
+offset_bottom = 29.5
+grow_horizontal = 2
+text = "Press any key..."
+
+[node name="InputHelperWarningPanel" type="Panel" parent="."]
+visible = false
+offset_left = 58.0
+offset_top = 31.0
+offset_right = 265.0
+offset_bottom = 128.0
 script = ExtResource("3_h2yge")
-listen = true
+
+[node name="Label" type="Label" parent="InputHelperWarningPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Enable input helper support Project Settings > Input Icons > Settings > Use Input Helper"
+autowrap_mode = 2
