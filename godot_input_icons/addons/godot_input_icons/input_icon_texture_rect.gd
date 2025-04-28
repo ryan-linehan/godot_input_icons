@@ -2,10 +2,8 @@
 class_name InputIconTextureRect
 extends TextureRect
 
-const InputTypes = preload("res://addons/godot_input_icons/input_icon_constants.gd").InputTypes
-
 ## The display device for the texture rect
-@export var display_device: InputTypes = InputTypes.Keyboard: set = set_display_device
+@export var display_device: InputIconConstants.InputTypes = InputIconConstants.InputTypes.Keyboard: set = set_display_device
 
 ## The input index to use when displaying this control for when there are multiple
 ## mappings for the same action and device type
@@ -16,14 +14,14 @@ var input_helper_adapter: InputHelperAdapter = null
 func _ready():
 	if not Engine.is_editor_hint() and \
 		ProjectSettings.get_setting(InputIconConstants.INPUT_HELPER_ADAPTER_SETTING_NAME, false):
-		input_helper_adapter = InputHelperAdapter.new(_action_property_value, _update_texture)
+		input_helper_adapter = InputHelperAdapter.new(_action_property_value, _update_texture, set_display_device)
 	_update_texture()
 	
 func set_action_index(value: int):
 	action_index = value
 	_update_texture()
 	
-func set_display_device(value: InputTypes) -> void:
+func set_display_device(value: InputIconConstants.InputTypes) -> void:
 	display_device = value
 	_update_texture()
 
@@ -35,11 +33,7 @@ func _update_texture() -> void:
 	var result = _icon_resolver.get_icon(display_device, _action_property_value, action_index)
 	texture = result
 	update_configuration_warnings()
-	
-func _get_configuration_warnings() -> PackedStringArray:
-	if not texture and _action_property_value != "--select--":
-		return ["Input icon not mapped"]
-	return []
+
 
 func set_action_property_value(value: Variant):
 	_action_property_value = value
@@ -60,6 +54,11 @@ func _get_property_list() -> Array:
 			"usage": PROPERTY_USAGE_DEFAULT
 		}
 	]
+
+func _get_configuration_warnings() -> PackedStringArray:
+	if not texture and _action_property_value != "--select--":
+		return ["Input icon not mapped"]
+	return []
 
 func _set(property: StringName, value: Variant) -> bool:
 	if property == _action_property_name:

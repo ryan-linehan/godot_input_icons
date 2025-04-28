@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cipb74td5x87b"]
+[gd_scene load_steps=4 format=3 uid="uid://cipb74td5x87b"]
 
 [ext_resource type="Texture2D" uid="uid://di0tthoimapkw" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/special_keys/key_space.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://d2a2relwnivg5" path="res://addons/godot_input_icons/input_icon_texture_rect.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bggplisxt6knl" path="res://remap_input_example.gd" id="3_h2yge"]
 
 [node name="Control" type="TextureRect"]
 offset_right = 16.0
@@ -9,3 +10,8 @@ offset_bottom = 16.0
 texture = ExtResource("1_0xm2m")
 stretch_mode = 4
 script = ExtResource("1_ig7tw")
+action_name = &"attack"
+
+[node name="RemapInput" type="Node" parent="."]
+script = ExtResource("3_h2yge")
+listen = true

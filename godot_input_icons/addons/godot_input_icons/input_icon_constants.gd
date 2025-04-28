@@ -9,7 +9,7 @@ const DEFAULT_INPUT_HELPER_ADAPTER_VALUE: bool = false
 enum InputTypes {
 	Keyboard,
 	Xbox,
-	Playstation,
 	Switch,
+	Playstation,
 	Generic
 }

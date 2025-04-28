@@ -266,3 +266,4 @@ static func get_all_user_registered_inputs() -> PackedStringArray:
 				if not setting_name.begins_with("ui_"):
 					input_actions.append(setting_name)
 	return input_actions
+	
