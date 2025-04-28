@@ -6,11 +6,10 @@ A godot plugin for displaying keyboard and controller icons
 
 - InputIconTextureRect for displaying user registered actions as images
   - Supports keyboard modifiers for any combination of keys that can be registered in the input map
-  - Integration with input_helper  [TODO: link input_helper ] for remapping
+  - Integration with input_helper  [TODO: link input_helper ]
+    (TODO: Create readme section for integration details - include info about 'device index' support)
   
 ## In Progress
-
-- Add 'device index' support + configuration warning if project setting to enable input_helper integration is not checked (OR only add it to the property list when the integration is enabled ++)
 
 - When a plugin project setting input changes reload the icon rect / update texture if we can
 - When the path for the default maps changes reload the icon rect / update text(or require editor restart?)
@@ -19,6 +18,7 @@ A godot plugin for displaying keyboard and controller icons
 - Complete TODOs or move into planned / future
 - Update all code so that it is statically typed
 - Rename plugin to match input_helper's naming convention
+- Update README.md to be user friendly
 
 ## Planned
 
