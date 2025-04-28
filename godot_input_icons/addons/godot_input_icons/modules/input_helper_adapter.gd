@@ -19,11 +19,11 @@ func _init(action_name: String, update_texture_callback: Callable) -> void:
 		push_warning("Unable to locate InputHelper. Did you add the plugin and enable it?")
 
 func set_action_name(val: String):
-	_action_name = val 
-
+	_action_name = val
+	
 func on_device_changed(device: String, device_index: int):
 	# TODO: Consider how to handle different device indexes
-    if device_index != 0:
+	if device_index != 0:
 		return
 	_update_texture_callback.call()
 	
@@ -36,7 +36,7 @@ func on_joypad_input_changed(action: String, input: InputEvent):
 		_update_texture_callback.call()
 
 func on_joypad_changed(device_index: int, is_connected: bool):
-    # TODO: Consider how to handle different device indexes
+	# TODO: Consider how to handle different device indexes
 	if device_index != 0:
 		return
 	_update_texture_callback.call()
