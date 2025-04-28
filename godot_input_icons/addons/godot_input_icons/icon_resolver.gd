@@ -230,8 +230,6 @@ static func get_device_type_display(device_type: InputTypes) -> String:
 	return "Unknown device type"
 
 
-## TODO: Consider caching textures that are combined so they don't
-## need to be recreated over and over
 ## Combines an array of Texture2Ds and converts them into a single Texture2D with a gap
 static func combine_textures_with_gap(textures: Array[Texture2D], gap: int = 2) -> Texture2D:
 	var total_width = 0
