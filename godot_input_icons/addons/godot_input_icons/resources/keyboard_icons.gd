@@ -56,6 +56,28 @@ extends Resource
 @export var key_space: Texture2D
 @export var key_tab: Texture2D
 @export var key_escape: Texture2D
+@export var key_capslock: Texture2D
+@export var key_home: Texture2D
+@export var key_end: Texture2D
+@export var key_page_up: Texture2D
+@export var key_page_down: Texture2D
+@export var key_insert: Texture2D
+@export var key_print: Texture2D
+@export var key_comma: Texture2D
+@export var key_period: Texture2D
+@export var key_delete: Texture2D
+@export var key_apostrophe: Texture2D
+@export var key_semicolon: Texture2D
+@export var key_bracketleft: Texture2D
+@export var key_bracketright: Texture2D
+@export var key_minus: Texture2D
+@export var key_equal: Texture2D
+@export var key_slash: Texture2D
+@export var key_backslash: Texture2D
+@export var key_backspace: Texture2D
+@export var key_enter: Texture2D
+@export var key_quoteleft: Texture2D
+
 
 @export_group("Modifiers")
 @export var key_alt: Texture2D
@@ -85,5 +107,3 @@ extends Resource
 @export var key_f10: Texture2D
 @export var key_f11: Texture2D
 @export var key_f12: Texture2D
-
-# TODO: Add other keys
