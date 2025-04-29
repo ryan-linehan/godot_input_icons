@@ -51,13 +51,13 @@ func get_keyboard_icon(input_action: String, index: int = 0) -> Texture2D:
 
 func get_keyboard_modifier_icons(input_event: InputEventWithModifiers) -> Array[Texture2D]:
 	var textures: Array[Texture2D] = []
-	if input_event.alt_pressed:
+	if input_event.alt_pressed and input_map.keyboard_icons.key_alt:
 		textures.append(input_map.keyboard_icons.key_alt)
-	if input_event.ctrl_pressed:
+	if input_event.ctrl_pressed and input_map.keyboard_icons.key_ctrl:
 		textures.append(input_map.keyboard_icons.key_ctrl)
-	if input_event.meta_pressed:
+	if input_event.meta_pressed and input_map.keyboard_icons.key_meta:
 		textures.append(input_map.keyboard_icons.key_meta)
-	if input_event.shift_pressed:
+	if input_event.shift_pressed and input_map.keyboard_icons.key_shift:
 		textures.append(input_map.keyboard_icons.key_shift)
 	return textures
 
