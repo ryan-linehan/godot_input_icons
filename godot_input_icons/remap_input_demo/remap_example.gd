@@ -34,10 +34,10 @@ func _input(event: InputEvent) -> void:
 
 func try_remap_event(event: InputEvent) -> void:
 	var did_remap: bool = false
-	if (event is InputEventKey or event is InputEventMouseButton) and event.is_pressed():
+	if (event is InputEventKey or event is InputEventMouseButton) and event.is_released():
 		InputHelper.replace_keyboard_input_at_index(remapping_action, 0, event)
 		did_remap = true
-	elif event is InputEventJoypadButton and event.is_pressed():
+	elif event is InputEventJoypadButton and event.is_released():
 		InputHelper.replace_joypad_input_at_index(remapping_action, 0, event)
 		did_remap = true
 	elif event is InputEventJoypadMotion:
