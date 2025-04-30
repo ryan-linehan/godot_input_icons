@@ -13,10 +13,15 @@ func _init() -> void:
 ## Gets an icon from the plugin's registed icon map based off of the device_type
 ## and the input_action passed in
 func get_icon(device_type: InputTypes, input_action: String, index: int = 0) -> Texture2D:
+	var result = null
 	if device_type == InputTypes.Keyboard:
-		return get_keyboard_icon(input_action, index)
+		result = get_keyboard_icon(input_action, index)
+		if not result and input_map.unmapped_key:
+			result = input_map.unmapped_key
 	else:
-		return get_joypad_icon(device_type, input_action, index)
+		if not result and input_map.unmapped_controller_button:
+			result = input_map.unmapped_controller_button
+	return result
 
 ## Gets the keyboard icon for the first keyboard input associated with
 ## an action
@@ -155,12 +160,20 @@ func _get_joypad_axis_icon(icon_map: ControllerIcons, joypad_motion_event: Input
 func _get_joypad_button_icon(icon_map: ControllerIcons, button_event: InputEventJoypadButton) -> Texture2D:
 	match button_event.button_index:
 		JOY_BUTTON_A:
+			if icon_map.face_button_down_extra:
+				return combine_textures_with_overlap([icon_map.face_button_down, icon_map.face_button_down_extra])
 			return icon_map.face_button_down
 		JOY_BUTTON_B:
+			if icon_map.face_button_right_extra:
+				return combine_textures_with_overlap([icon_map.face_button_right, icon_map.face_button_right_extra])
 			return icon_map.face_button_right
 		JOY_BUTTON_X:
+			if icon_map.face_button_left_extra:
+				return combine_textures_with_overlap([icon_map.face_button_left, icon_map.face_button_left_extra])
 			return icon_map.face_button_left
 		JOY_BUTTON_Y:
+			if icon_map.face_button_up_extra:
+				return combine_textures_with_overlap([icon_map.face_button_up, icon_map.face_button_up_extra])
 			return icon_map.face_button_up
 		JOY_BUTTON_DPAD_UP:
 			return icon_map.dpad_up
@@ -181,36 +194,23 @@ func _get_joypad_button_icon(icon_map: ControllerIcons, button_event: InputEvent
 		JOY_BUTTON_INVALID:
 			return icon_map.invalid_button
 		JOY_BUTTON_GUIDE:
-			return null
-			# return icon_map.guide_button 
+			return icon_map.guide_button 
 		JOY_BUTTON_LEFT_STICK:
 			return icon_map.left_stick_in
 		JOY_BUTTON_RIGHT_STICK:
 			return icon_map.right_stick_in
 		JOY_BUTTON_MISC1:
-			return null
-			#return icon_map.misc1_button
+			return icon_map.misc1
 		JOY_BUTTON_PADDLE1:
-			return null
-			# return icon_map.paddle1_button
+			return icon_map.paddle1
 		JOY_BUTTON_PADDLE2:
-			return null
-			#return icon_map.paddle2_button
+			return icon_map.paddle2
 		JOY_BUTTON_PADDLE3:
-			return null
-			#return icon_map.paddle3_button
+			return icon_map.paddle3
 		JOY_BUTTON_PADDLE4:
-			return null
-			#return icon_map.paddle4_button
+			return icon_map.paddle4
 		JOY_BUTTON_TOUCHPAD:
-			return null
-			#return icon_map.touchpad_button
-		JOY_BUTTON_SDL_MAX:
-			return null
-			#return icon_map.sdl_max_button
-		JOY_BUTTON_MAX:
-			return null
-			#return icon_map.max_button
+			return icon_map.touchpad
 		_:
 			return null
 
@@ -228,6 +228,27 @@ static func get_device_type_display(device_type: InputTypes) -> String:
 			return "Generic"
 	return "Unknown device type"
 
+
+static func combine_textures_with_overlap(textures: Array[Texture2D]) -> Texture2D:
+	var max_width = 0
+	var max_height = 0
+
+	for texture in textures:
+		if not texture:
+			continue
+		max_width = max(max_width, texture.get_width())
+		max_height = max(max_height, texture.get_height())
+	
+	var combined_image = Image.create_empty(max_width, max_height, false, Image.FORMAT_RGBA8)
+
+	# Blend each texture onto the combined image
+	for texture in textures:
+		if not texture:
+			continue
+		var image = texture.get_image()
+		combined_image.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2(0, 0))
+			
+	return ImageTexture.create_from_image(combined_image)
 
 ## Combines an array of Texture2Ds and converts them into a single Texture2D with a gap
 static func combine_textures_with_gap(textures: Array[Texture2D], gap: int = 2) -> Texture2D:
@@ -263,4 +284,3 @@ static func get_all_user_registered_inputs() -> PackedStringArray:
 				if not setting_name.begins_with("ui_"):
 					input_actions.append(setting_name)
 	return input_actions
-	
