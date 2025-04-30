@@ -18,13 +18,17 @@ var _action_property_name: String = "action_name"
 var _action_property_default: StringName = "--select--"
 var action_name: StringName = _action_property_default: set = set_action_property_value
 var device_indexes: PackedInt32Array = []
+## User override for disabling the helper for this node instance while
+## keeping the adapter enabled for the entire plugin.
+## NOTE: Done by overriding _get_property_list, _get, _set, etc
+var enable_input_helper: bool = true
 #endregion
 
 func _init():
 	is_input_helper_adapter_enabled = ProjectSettings.get_setting(InputIconConstants.INPUT_HELPER_ADAPTER_SETTING_NAME, false)
 
 func _ready():
-	if is_input_helper_adapter_enabled:
+	if is_input_helper_adapter_enabled and enable_input_helper:
 		input_helper_adapter = InputHelperAdapter.new(action_name, _update_texture, set_display_device)
 		input_helper_adapter.device_indexes = device_indexes
 	_update_texture()
@@ -64,13 +68,14 @@ func set_action_property_value(value: Variant):
 func _get_property_list() -> Array:
 	var properties = [get_action_property_dict()]
 	if is_input_helper_adapter_enabled:
-		properties.append(InputHelperAdapter.get_device_index_property_dict())
+		InputHelperAdapter.add_adapter_properties(properties)
 	return properties
 
 
 func _property_can_revert(property: StringName) -> bool:
 	return property == _action_property_name or \
-		property == InputHelperAdapter.device_indexes_property_name
+		property == InputHelperAdapter.device_indexes_property_name or \
+		property == InputHelperAdapter.adapter_enabled_property_name
 	
 
 func _property_get_revert(property: StringName) -> Variant:
@@ -78,11 +83,15 @@ func _property_get_revert(property: StringName) -> Variant:
 		return _action_property_default
 	elif property == InputHelperAdapter.device_indexes_property_name:
 		return InputHelperAdapter.editor_device_indexes_default
+	elif property == InputHelperAdapter.adapter_enabled_property_name:
+		return true
 	return null
 
 
 func _get_configuration_warnings() -> PackedStringArray:
-	if not texture and action_name != _action_property_default:
+	var is_unmapped_texture: bool = texture == _icon_resolver.input_map.unmapped_controller_button \
+						or texture == _icon_resolver.input_map.unmapped_key
+	if (not texture or is_unmapped_texture) and action_name != _action_property_default:
 		return ["Input icon not mapped"]
 	return []
 
@@ -104,20 +113,26 @@ func _set(property: StringName, value: Variant) -> bool:
 	if property == _action_property_name:
 		set_action_property_value(value)
 		return true
-	elif property == InputHelperAdapter.device_indexes_property_name \
-		and input_helper_adapter != null and is_input_helper_adapter_enabled:
-			device_indexes = value
-			input_helper_adapter.device_indexes = value
-			return true
+	elif is_input_helper_adapter_enabled:
+			if property == InputHelperAdapter.device_indexes_property_name:
+				device_indexes = value
+				if input_helper_adapter != null:
+					input_helper_adapter.device_indexes = value
+				return true
+			elif property == InputHelperAdapter.adapter_enabled_property_name:
+				enable_input_helper = value
+				return true
 	return false
 
 
 func _get(property: StringName) -> Variant:
 	if property == _action_property_name:
 		return action_name
-	elif property == InputHelperAdapter.device_indexes_property_name \
-		and is_input_helper_adapter_enabled:
+	elif is_input_helper_adapter_enabled: 
+		if property == InputHelperAdapter.device_indexes_property_name:
 			return device_indexes
+		elif property == InputHelperAdapter.adapter_enabled_property_name:
+			return enable_input_helper
 	return null
 	
 #endregion

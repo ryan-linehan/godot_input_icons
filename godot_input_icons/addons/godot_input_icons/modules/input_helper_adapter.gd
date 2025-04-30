@@ -66,10 +66,31 @@ static func input_helper_device_to_icon_helper_device(device: String) -> InputIc
 
 
 const device_indexes_property_name: String = "device_indexes"
-
 static func get_device_index_property_dict() -> Dictionary:
 	return {
 		"name": device_indexes_property_name,
 		"type": TYPE_PACKED_INT32_ARRAY,
 		"usage": PROPERTY_USAGE_DEFAULT
 	}
+	
+const adapter_enabled_property_name: String = "adapter_enabled"
+static func get_adapter_enabled_property_dict() -> Dictionary:
+	return {
+		"name": adapter_enabled_property_name,
+		"type": TYPE_BOOL,
+		"usage": PROPERTY_USAGE_DEFAULT
+	}
+
+## Adds all property dictionaries to the for all
+## neccessary properties relating to the
+## input helper adapter to the array passed in
+static func add_adapter_properties(properties: Array) -> void:
+	properties.append({
+			name = "Input Helper Options",
+			type = TYPE_NIL,
+			hint_string = "Input Helper Options",
+			usage = PROPERTY_USAGE_CATEGORY
+		})
+	properties.append(InputHelperAdapter.get_adapter_enabled_property_dict())
+	properties.append(InputHelperAdapter.get_device_index_property_dict())
+	
