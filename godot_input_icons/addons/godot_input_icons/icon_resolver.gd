@@ -19,6 +19,7 @@ func get_icon(device_type: InputTypes, input_action: String, index: int = 0) -> 
 		if not result and input_map.unmapped_key:
 			result = input_map.unmapped_key
 	else:
+		result = get_joypad_icon(device_type, input_action, index)
 		if not result and input_map.unmapped_controller_button:
 			result = input_map.unmapped_controller_button
 	return result
