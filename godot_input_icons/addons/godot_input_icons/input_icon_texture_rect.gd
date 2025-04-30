@@ -17,6 +17,7 @@ var is_input_helper_adapter_enabled: bool = false
 var _action_property_name: String = "action_name"
 var _action_property_default: StringName = "--select--"
 var action_name: StringName = _action_property_default: set = set_action_property_value
+var device_indexes: PackedInt32Array = []
 #endregion
 
 func _init():
@@ -25,6 +26,7 @@ func _init():
 func _ready():
 	if is_input_helper_adapter_enabled:
 		input_helper_adapter = InputHelperAdapter.new(action_name, _update_texture, set_display_device)
+		input_helper_adapter.device_indexes = device_indexes
 	_update_texture()
 	
 	
@@ -104,6 +106,7 @@ func _set(property: StringName, value: Variant) -> bool:
 		return true
 	elif property == InputHelperAdapter.device_indexes_property_name \
 		and input_helper_adapter != null and is_input_helper_adapter_enabled:
+			device_indexes = value
 			input_helper_adapter.device_indexes = value
 			return true
 	return false
@@ -113,8 +116,8 @@ func _get(property: StringName) -> Variant:
 	if property == _action_property_name:
 		return action_name
 	elif property == InputHelperAdapter.device_indexes_property_name \
-		and input_helper_adapter != null and is_input_helper_adapter_enabled:
-			return input_helper_adapter.device_indexes
+		and is_input_helper_adapter_enabled:
+			return device_indexes
 	return null
 	
 #endregion
