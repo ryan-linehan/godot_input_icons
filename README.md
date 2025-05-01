@@ -3,7 +3,8 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Godot Version](https://img.shields.io/badge/Godot-4.4.X-yellow)
 
-## TODO: ADD GIF / PICTURE
+| ![Editor Demo](.github/editor_demo.gif) | ![Remap Demo](.github/remap_demo.gif) |
+|-----------------------------------------|---------------------------------------|
 
 This is a godot plugin that helps to display user registered actions and controller icons into a TextureRect control by introducing a new control InputIconTextureRect. This plugin also provides a way to get an action's icon at runtime
 
@@ -23,6 +24,7 @@ This is a godot plugin that helps to display user registered actions and control
   - Helps developers visualize their input icon textures for different input types in the editor as well as responds to changes in values at runtime
   - Select from list of registered user inputs
 - **InputIconResolver**: A godot object that can be instantiated to resolve input icons at runtime
+  - Supports modifier keys (shift, ctrl, etc)
 - **Remap Input Demo**: A demo of how to use this plugin to remap inputs and display their icons in game
 - **Godot Input Helper integration**: Integrate's with Nathan Hoad's godot input helper plugin to help simplify tedious controller tasks such as:
   - Swapping textures when controls are remapped for any device (keyboard, controller)
@@ -69,7 +71,6 @@ The plugin is usable out of the box without doing anything but using the new con
   - Device Indexes: The device indexes that the input map should (Set to empty array to listen to any device)
 
 > NOTE: Default is [-1, 0] as that is keyboard and mouse + first controller input
-
 
 ## 📚 Documentation
 
