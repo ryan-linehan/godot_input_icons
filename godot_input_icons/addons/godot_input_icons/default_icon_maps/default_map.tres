@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="InputIconMap" load_steps=10 format=3 uid="uid://dugr8x7rasv3i"]
+
+[ext_resource type="Script" uid="uid://db0gxldvhci3p" path="res://addons/godot_input_icons/resources/controller_icons.gd" id="1_el15c"]
+[ext_resource type="Resource" uid="uid://nqd1cqbwctrs" path="res://addons/godot_input_icons/default_icon_maps/controller/xbox_default_map.tres" id="2_w2iqv"]
+[ext_resource type="Resource" uid="uid://dcrdbbhivenx7" path="res://addons/godot_input_icons/default_icon_maps/keyboard_default_map.tres" id="3_kh1s0"]
+[ext_resource type="Resource" uid="uid://dmpbvlphvxjm1" path="res://addons/godot_input_icons/default_icon_maps/controller/switch_default_map.tres" id="3_ooyca"]
+[ext_resource type="Resource" uid="uid://y8gohpdojpcc" path="res://addons/godot_input_icons/default_icon_maps/controller/playstation_default_map.tres" id="4_1k3pg"]
+[ext_resource type="Script" uid="uid://dth3wa8g0tv2g" path="res://addons/godot_input_icons/resources/input_icon_map.gd" id="4_w2iqv"]
+[ext_resource type="Resource" uid="uid://bai5y1ydlgfrt" path="res://addons/godot_input_icons/default_icon_maps/controller/generic_default_map.tres" id="5_cut6n"]
+[ext_resource type="Texture2D" uid="uid://c4xxgupjruku7" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/unmapped_controller_button.tres" id="8_ooyca"]
+[ext_resource type="Texture2D" uid="uid://bdlxdlo2usvt8" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/unmapped_key.tres" id="9_1k3pg"]
+
+[resource]
+script = ExtResource("4_w2iqv")
+keyboard_icons = ExtResource("3_kh1s0")
+controller_icons = Dictionary[int, ExtResource("1_el15c")]({
+1: ExtResource("2_w2iqv"),
+2: ExtResource("3_ooyca"),
+3: ExtResource("4_1k3pg"),
+4: ExtResource("5_cut6n")
+})
+unmapped_key = ExtResource("9_1k3pg")
+unmapped_controller_button = ExtResource("8_ooyca")
+metadata/_custom_type_script = "uid://dth3wa8g0tv2g"
