@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-const SETTINGS_CONFIGURATION = {
+const SETTINGS_CONFIGURATION: Dictionary = {
 	InputIconConstants.MAP_PATH_SETTING_NAME: {
 		value = InputIconConstants.DEFAULT_MAP_PATH,
 		type = TYPE_STRING,

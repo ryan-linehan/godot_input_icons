@@ -9,7 +9,7 @@ extends TextureRect
 ## mappings for the same action and device type
 @export var action_index: int = 0: set = set_action_index
 
-var _icon_resolver: IconResolver = IconResolver.new()
+var _icon_resolver: InputIconResolver = InputIconResolver.new()
 var input_helper_adapter: InputHelperAdapter = null
 var is_input_helper_adapter_enabled: bool = false
 
@@ -24,18 +24,17 @@ var device_indexes: PackedInt32Array = []
 var enable_input_helper: bool = true
 #endregion
 
-func _init():
+func _init() -> void:
 	is_input_helper_adapter_enabled = ProjectSettings.get_setting(InputIconConstants.INPUT_HELPER_ADAPTER_SETTING_NAME, false)
 
-func _ready():
+func _ready() -> void:
 	if is_input_helper_adapter_enabled and enable_input_helper:
 		input_helper_adapter = InputHelperAdapter.new(action_name, _update_texture, set_display_device)
 		input_helper_adapter.device_indexes = device_indexes
 	_update_texture()
 	
-	
 ## Sets the action_index and updates the controls texture
-func set_action_index(value: int):
+func set_action_index(value: int) -> void:
 	action_index = value
 	_update_texture()
 
@@ -52,13 +51,13 @@ func _update_texture() -> void:
 		texture = null
 		return
 	
-	var result = _icon_resolver.get_icon(display_device, action_name, action_index)
+	var result: Texture2D = _icon_resolver.get_icon(display_device, action_name, action_index)
 	texture = result
 	update_configuration_warnings()
 
 #region Godot Editor Customizations
 
-func set_action_property_value(value: Variant):
+func set_action_property_value(value: Variant) -> void:
 	action_name = value
 	if input_helper_adapter != null:
 		input_helper_adapter.action_name = value
@@ -89,8 +88,8 @@ func _property_get_revert(property: StringName) -> Variant:
 
 
 func _get_configuration_warnings() -> PackedStringArray:
-	var is_unmapped_texture: bool = texture == _icon_resolver.input_map.unmapped_controller_button \
-						or texture == _icon_resolver.input_map.unmapped_key
+	var is_unmapped_texture: bool = texture == _icon_resolver.input_icon_map.unmapped_controller_button \
+						or texture == _icon_resolver.input_icon_map.unmapped_key
 	if (not texture or is_unmapped_texture) and action_name != _action_property_default:
 		return ["Input icon not mapped"]
 	return []
@@ -98,8 +97,8 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 func get_action_property_dict() -> Dictionary:
 	var inputs: PackedStringArray = [_action_property_default]
-	inputs.append_array(IconResolver.get_all_user_registered_inputs())
-	var hint_string = ",".join(inputs)
+	inputs.append_array(InputIconResolver.get_all_user_registered_inputs())
+	var hint_string: String = ",".join(inputs)
 	return {
 		"name": _action_property_name,
 		"type": TYPE_STRING,
