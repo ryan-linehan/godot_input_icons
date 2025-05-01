@@ -50,7 +50,6 @@ static func input_helper_device_to_icon_helper_device(device: String) -> InputIc
 	match device:
 		InputHelper.DEVICE_KEYBOARD:
 			return InputIconConstants.InputTypes.Keyboard
-		# TODO: Consider truly supporting these subdevices by adding enumeration values
 		InputHelper.DEVICE_XBOX_CONTROLLER, InputHelper.SUB_DEVICE_XBOX_ONE_CONTROLLER, \
 			InputHelper.SUB_DEVICE_XBOX_SERIES_CONTROLLER:
 			return InputIconConstants.InputTypes.Xbox
