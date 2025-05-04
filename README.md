@@ -26,7 +26,7 @@ This is a godot plugin that helps to display user registered actions and control
 - **InputIconResolver**: A godot object that can be instantiated to resolve input icons at runtime
   - Supports modifier keys (shift, ctrl, etc)
 - **Remap Input Demo**: A demo of how to use this plugin to remap inputs and display their icons in game
-- **Godot Input Helper integration**: Integrate's with Nathan Hoad's godot input helper plugin to help simplify tedious controller tasks such as:
+- **Godot Input Helper integration**: Integrate's with Nathan Hoad's [godot input helper](https://github.com/nathanhoad/godot_input_helper) plugin to help simplify tedious controller tasks such as:
   - Swapping textures when controls are remapped for any device (keyboard, controller)
   - Swapping displayed textures from keyboard to controller and vice-versa
   - Completely optional!
@@ -62,13 +62,13 @@ The plugin is usable out of the box without doing anything but using the new con
 
 > NOTE: Alternatively just change the default ones!
 
-### Using Input Helper Integration
+### Using Input Helper Integration 
+1. First install [godot input helper](https://github.com/nathanhoad/godot_input_helper) and enable it
+2. Enable the input helper adapter in the project settings under `Project > Prject Settings > General > Input Helper > Settings > Use Input Helper`
 
-- Enable the input helper adapter in the project settings under `Project > Prject Settings > General > Input Helper > Settings > Use Input Helper`
-
-- There are now extra properties added to the `InputIconTextureRect`
-  - Adapter Enabled: When enabled the `InputIconTextureRect` will respond to input changes and controller remappings automatically using the input helper plugin
-  - Device Indexes: The device indexes that the input map should (Set to empty array to listen to any device)
+3. There are now extra properties added to the `InputIconTextureRect`
+    - **Adapter Enabled**: When enabled the `InputIconTextureRect` will respond to input changes and controller remappings automatically using the input helper plugin
+    - **Device Indexes**: The device indexes that the input map should (Set to empty array to listen to any device)
 
 > NOTE: Default is [-1, 0] as that is keyboard and mouse + first controller input
 
